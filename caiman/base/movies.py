@@ -16,6 +16,11 @@ from builtins import range
 from past.utils import old_div
 
 import cv2
+try:
+    from google.colab.patches import cv2_imshow
+except:
+    from cv2 import imshow as cv2_imshow
+
 from functools import partial
 import h5py
 import logging
@@ -1355,7 +1360,7 @@ class movie(ts.timeseries):
                                     color=(255, 255, 255),
                                     thickness=1)
 
-                    cv2.imshow('frame', frame)
+                    cv2_imshow('frame', frame)
                     if save_movie:
                         if frame.ndim < 3:
                             frame = np.repeat(frame[:, :, None], 3, axis=-1)
